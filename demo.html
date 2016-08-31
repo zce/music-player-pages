@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- 引入 Bootstrap -->
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../CSS/index.css">
+</head>
+<body>
+<div>
+    <table class="table">
+        <thead>
+            <th>编号</th>
+            <th>歌曲名称</th>
+            <th>歌手</th>
+            <th>song_id</th>
+            <th>bitrate_fee</th>
+            <th>publishtime</th>
+            <th>pic_big</th>
+            <th>pic_small</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <button id="btn">获取数据</button>
+</div>
+<nav>
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=0)">1</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=1)">2</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=2)">3</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=3)">4</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=4)">5</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=5)">6</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=6)">7</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=7)">8</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=8)">9</a></li>
+        <li><a href="requestData(http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=9)">10</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+<script>
+    //请求数据
+    function requestData(url){
+        $.ajax({
+            url:url,
+            dataType:"jsonp",
+            jsonp:"callback",
+            success:function(data){
+                getData(data);
+            }
+        });
+    }
+    function getData(data){
+        var songList = data["song_list"];
+        $.each(songList,function (i,v) {
+            var songName = v["title"];
+            var songAuthor =v["author"];
+            var songId = v["song_id"];
+            var bitrate_fee = v["bitrate_fee"];
+            var publishtime = v["publishtime"];
+            var pic_big = v["pic_big"];
+            var pic_small = v["pic_small"];
+            $(".table").append("<tr>"+
+                            "<td>"+(i+1)+
+                            "</td><td>"+songName+
+                            "</td><td>"+songAuthor+
+                            "</td><td>"+songId+
+                            "</td><td>"+bitrate_fee+
+                            "</td><td>"+publishtime+
+                            "</td><td>"+pic_big+
+                            "</td><td>"+pic_small+
+                            +"</td>"+
+                    "</tr>")
+
+        })
+    }
+    $(document).ready(function(){
+        $("#btn").click(function(){
+         requestData("http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=10&offset=0");
+        });
+    });
+
+</script>
+</html>
