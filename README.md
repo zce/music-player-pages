@@ -10,7 +10,7 @@ http://code.zce.me/music-player-pages/
 
 ![歌曲列表](img/songs.png)
 
-![歌曲列表](img/songs.png)
+![歌曲播放器](img/player.png)
 
 <!-- ## 搜索建议
 http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.search.catalogSug&format=json&query=%E5%B0%8F%E8%8B%B9%E6%9E%9C
